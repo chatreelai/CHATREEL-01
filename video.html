@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatReel AI — Background Video</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js"></script>
+</head>
+<body>
+  <header>
+    <h1>ChatReel AI</h1>
+    <p>Step 4: Upload gameplay or background video</p>
+  </header>
+  <main>
+    <h2>Background Video</h2>
+    <p>You may upload a video file or paste a YouTube link (future).</p>
+    <input type="file" id="bgVideoUpload" accept="video/*">
+    <input type="text" id="bgVideoLink" placeholder="Paste YouTube URL (not implemented)">
+    <div class="nav-buttons">
+      <button id="backBtn">← Back</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </main>
+  <footer>
+    <p>Step 4 of 5</p>
+  </footer>
+  <script>
+    document.getElementById('backBtn').addEventListener('click', () => {
+      goTo('voice.html');
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      // For uploaded file, real preview needs FileReader / server upload.
+      const input = document.getElementById('bgVideoUpload');
+      if (input.files.length) {
+        saveData('chatreel_bgVideo', true);
+      } else {
+        const link = document.getElementById('bgVideoLink').value.trim();
+        if (link) {
+          saveData('chatreel_bgVideoLink', link);
+        }
+      }
+      goTo('editor.html');
+    });
+  </script>
+</body>
+</html>
