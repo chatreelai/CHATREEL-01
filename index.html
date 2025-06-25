@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatReel AI — Theme</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js"></script>
+</head>
+<body>
+  <header>
+    <h1>ChatReel AI</h1>
+    <p>Select a theme</p>
+  </header>
+  <main>
+    <h2>Choose Theme</h2>
+    <select id="themeSelect">
+      <option value="chat">Chat Story</option>
+      <option value="reddit">Reddit Story</option>
+      <option value="scary">Scary Story</option>
+      <option value="monkey">Monkey/Animal Vlog</option>
+    </select>
+    <div class="nav-buttons">
+      <button id="nextBtn">Next →</button>
+    </div>
+  </main>
+  <footer>
+    <p>Step 1 of 5</p>
+  </footer>
+  <script>
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const theme = document.getElementById('themeSelect').value;
+      saveData('chatreel_theme', theme);
+      // clear any later data
+      localStorage.removeItem('chatreel_script');
+      localStorage.removeItem('chatreel_voiceChoice');
+      localStorage.removeItem('chatreel_customAudio');
+      localStorage.removeItem('chatreel_screenshotData');
+      localStorage.removeItem('chatreel_bgVideo');
+      localStorage.removeItem('chatreel_finalData');
+      goTo('script.html');
+    });
+    // Pre-select if returning
+    const prev = loadData('chatreel_theme');
+    if (prev) document.getElementById('themeSelect').value = prev;
+  </script>
+</body>
+</html>
