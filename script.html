@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatReel AI — Script</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js"></script>
+</head>
+<body>
+  <header>
+    <h1>ChatReel AI</h1>
+    <p>Step 2: Write or generate your script</p>
+  </header>
+  <main>
+    <h2>Theme: <span id="themeName"></span></h2>
+    <textarea id="scriptInput" rows="6" placeholder="Write your story here..."></textarea>
+    <button id="genBtn">AI Generate Script</button>
+    <div class="nav-buttons">
+      <button id="backBtn">← Back</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </main>
+  <footer>
+    <p>Step 2 of 5</p>
+  </footer>
+  <script>
+    // Display chosen theme
+    const theme = loadData('chatreel_theme') || 'chat';
+    document.getElementById('themeName').innerText = theme;
+
+    // Preload existing script if any
+    const prevScript = loadData('chatreel_script');
+    if (prevScript) document.getElementById('scriptInput').value = prevScript;
+
+    document.getElementById('genBtn').addEventListener('click', () => {
+      // Placeholder AI generation logic:
+      let generated = '';
+      if (theme === 'scary') {
+        generated = "You walk into a dark room... footsteps echo.";
+      } else if (theme === 'reddit') {
+        generated = "I never thought I'd share this, but here's what happened...";
+      } else if (theme === 'monkey') {
+        generated = "Today I'm a talking monkey sharing life tips...";
+      } else {
+        // chat
+        generated = "Hi Dad\nHey there!\nHow was your day?\nIt was great!";
+      }
+      document.getElementById('scriptInput').value = generated;
+      saveData('chatreel_script', generated);
+    });
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+      goTo('index.html');
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const txt = document.getElementById('scriptInput').value.trim();
+      if (!txt) {
+        alert('Please write or generate a script before proceeding.');
+        return;
+      }
+      saveData('chatreel_script', txt);
+      goTo('voice.html');
+    });
+  </script>
+</body>
+</html>
