@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatReel AI — Editor & Preview</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js"></script>
+</head>
+<body>
+  <header>
+    <h1>ChatReel AI</h1>
+    <p>Step 5: Preview & Export</p>
+  </header>
+  <main>
+    <h2>Preview</h2>
+    <div id="previewArea">Loading preview...</div>
+
+    <h2>Export</h2>
+    <button id="downloadBtn">Download Video</button>
+    <button id="restartBtn">Start Over</button>
+  </main>
+  <footer>
+    <p>Step 5 of 5</p>
+  </footer>
+  <script>
+    // On load, assemble preview from stored data
+    window.addEventListener('DOMContentLoaded', () => {
+      const theme = loadData('chatreel_theme');
+      const script = loadData('chatreel_script') || '';
+      const voiceChoice = loadData('chatreel_voiceChoice') || '';
+      const bgVideo = loadData('chatreel_bgVideo') || loadData('chatreel_bgVideoLink') || '';
+      let previewText = `Theme: ${theme}\nScript:\n${script}\nVoice: ${voiceChoice}\nBackground video: ${bgVideo ? 'Provided' : 'None'}`;
+      // Screenshot data not fully storable; just note if user uploaded
+      if (loadData('chatreel_screenshotData')) {
+        previewText += `\nScreenshots: Uploaded`;
+      } else {
+        previewText += `\nScreenshots: Auto-generate`;
+      }
+      document.getElementById('previewArea').innerText = previewText;
+      // TODO: Here you'd trigger real video assembly via API or backend
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      alert('Placeholder: The video would be downloaded here after real assembly.');
+    });
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      // Clear all and go back to start
+      localStorage.clear();
+      goTo('index.html');
+    });
+  </script>
+</body>
+</html>
